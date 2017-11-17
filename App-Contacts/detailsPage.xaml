@@ -1,0 +1,87 @@
+﻿<Page
+    x:Class="App_Contacts.detailsPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:App_Contacts"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d" Loaded="Page_Loaded">
+    <Page.Resources>
+        <Style TargetType="TextBlock">
+            <Setter Property="Margin" Value="5"/>
+        </Style>
+        <Style TargetType="TextBox">
+            <Setter Property="Margin" Value="5 "/>
+        </Style>
+    </Page.Resources>
+    <Page.BottomAppBar>
+        <CommandBar>
+            <CommandBar.Content>
+                <AppBarButton x:Name="BtnBack" Click="BtnBack_Click" Icon="Back" />
+            </CommandBar.Content>
+            <AppBarButton x:Name="BtnDelete" Click="BtnDelete_Click" Icon="Delete" />
+            <AppBarButton x:Name="BtnAdd" Click="BtnAdd_Click" Icon="Save" />
+        </CommandBar>
+    </Page.BottomAppBar>
+    
+    <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}" Padding="20">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <StackPanel Grid.Row="0">
+            <TextBlock Text="DETAILS" Foreground="White" FontWeight="Bold"/>
+        </StackPanel>
+        <ScrollViewer Grid.Row="1">
+            <Grid >
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+
+                <TextBlock Grid.Column="0" Grid.Row="0" Text="Id"/>
+                <TextBox Grid.Column="1" Grid.Row="0" Text="{Binding Id,Mode=TwoWay ,UpdateSourceTrigger=PropertyChanged}"/>
+
+                <TextBlock Grid.Column="0" Grid.Row="1" Text="Name"/>
+                <TextBox Grid.Column="1" Grid.Row="1" Text="{Binding ContactName,Mode=TwoWay ,UpdateSourceTrigger=PropertyChanged}"/>
+
+                <TextBlock Grid.Column="0" Grid.Row="2" Text="Phone"/>
+                <TextBox Grid.Column="1" Grid.Row="2" Text="{Binding Phone,Mode=TwoWay ,UpdateSourceTrigger=PropertyChanged}"/>
+
+                <TextBlock Grid.Column="0" Grid.Row="3" Text="Address"/>
+                <TextBox Grid.Column="1" Grid.Row="3" Text="{Binding Address,Mode=TwoWay ,UpdateSourceTrigger=PropertyChanged}"/>
+
+                <TextBlock Grid.Column="0" Grid.Row="4" Text="Email"/>
+                <TextBox Grid.Column="1" Grid.Row="4" Text="{Binding Email,Mode=TwoWay ,UpdateSourceTrigger=PropertyChanged}"/>
+
+
+
+
+                <TextBlock Grid.Column="0" Grid.Row="5" Text="Group"/>
+                <ComboBox x:Name="CbbGroups"  Grid.Column="1" Grid.Row="5" Margin="5" Width="100" SelectedValue="{Binding GroupName,Mode=TwoWay ,UpdateSourceTrigger=PropertyChanged}" SelectedValuePath="Content">
+                    <ComboBoxItem>Friends</ComboBoxItem>
+                    <ComboBoxItem>Family</ComboBoxItem>
+                    <ComboBoxItem>Other</ComboBoxItem>
+                </ComboBox>
+
+                <TextBlock Grid.Column="0" Grid.Row="6" Text="Avatar"/>
+                <StackPanel Grid.Column="1" Grid.Row="6">
+                    <TextBox x:Name="TxtAvatar" TextChanged="TxtAvatar_TextChanged" Text="{Binding Avatar,Mode=TwoWay ,UpdateSourceTrigger=PropertyChanged}"/>
+                    <Image x:Name="ImgAvatar" HorizontalAlignment="Stretch" Height="300" Stretch="Uniform" Margin="10"/>
+                </StackPanel>
+
+            </Grid>
+        </ScrollViewer>
+       
+    </Grid>
+</Page>

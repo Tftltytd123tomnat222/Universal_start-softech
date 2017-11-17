@@ -1,0 +1,70 @@
+﻿<Page
+    x:Class="App_Contacts.MainPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:App_Contacts"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d" Loaded="Page_Loaded">
+
+    <Page.Resources>
+        <Style TargetType="ListBoxItem">
+            <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
+        </Style>
+    </Page.Resources>
+    <Page.BottomAppBar>
+        <CommandBar>
+            <AppBarButton x:Name="BtnAdd" Click="BtnAdd_Click" Icon="AddFriend" />
+        </CommandBar>
+    </Page.BottomAppBar>
+    <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <StackPanel Grid.Row="0" Background="#50c0ed" Padding="10">
+            <TextBlock Text="MY CONTACTS" Foreground="White" FontWeight="Bold" FontSize="16"/>
+        </StackPanel>
+        <Grid Grid.Row="1" Padding="10">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="Auto"/>
+            </Grid.ColumnDefinitions>
+            <SearchBox x:Name="TxtKeywords" Grid.Column="0" QuerySubmitted="TxtKeywords_QuerySubmitted" HorizontalAlignment="Stretch"/>
+            <ComboBox x:Name="CbbGroups" Grid.Column="1" Width="100" SelectedValuePath="Content" SelectionChanged="CbbGroups_SelectionChanged">
+                <ComboBoxItem>All</ComboBoxItem>
+                <ComboBoxItem>Friends</ComboBoxItem>
+                <ComboBoxItem>Family</ComboBoxItem>
+                <ComboBoxItem>Other</ComboBoxItem>
+            </ComboBox>
+        </Grid>
+        <ListBox x:Name="LstContacts" Grid.Row="2" SelectedValuePath="Id" SelectionChanged="LstContacts_SelectionChanged">
+            <ListBox.ItemTemplate>
+                <DataTemplate>
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="Auto"/>
+                        </Grid.ColumnDefinitions>
+                        <Ellipse Grid.Column="0" Width="70" Height="70" Stretch="Uniform">
+                            <Ellipse.Fill>
+                                <ImageBrush Stretch="Uniform">
+                                    <ImageBrush.ImageSource>
+                                        <BitmapImage UriSource="{Binding Avatar}" DecodePixelWidth="70"/>
+                                    </ImageBrush.ImageSource>
+                                </ImageBrush>
+                            </Ellipse.Fill>
+                            <!--<Image.Source>
+                                <BitmapImage UriSource="{Binding Avatar}" DecodePixelWidth="70"/>
+                            </Image.Source>-->
+                        </Ellipse>
+                        <TextBlock  Grid.Column="1" Padding="10 25 10 10" Text="{ Binding ContactName}" FontWeight="Bold" Foreground="#3a9b31" FontSize="15"/>
+                        <TextBlock Grid.Column="2" Padding="10 25 10 10" Text="{ Binding Phone}"  FontWeight="Bold" Foreground="#575957" FontSize="15"/>
+                    </Grid>
+                </DataTemplate>
+            </ListBox.ItemTemplate>
+        </ListBox>
+    </Grid>
+</Page>
